@@ -1,25 +1,77 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+// import logo from './logo.svg';
+import {Block,TitleLine} from './components/block';
 import './App.css';
 
 function App() {
+  const [state, setState]=useState(Array(9).fill(null))
+  const [user, setUser]=useState("X")
+  const [heading, setTitle]=useState("Tic Tac Toe");
+
+  const checkWinner = (state: any[]) => {
+  const win =[
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for(let i=0; i<win.length; i=i+1){
+    const [a, b, c]=win[i];
+    // console.log(win[i],i)
+    if(state[a]!==null && state[a]===state[b] && state[a]===state[c]) return true
+  }
+  return false;
+};
+const handleOnclick=(index:number)=>{
+  const statecopy=Array.from(state)
+  // console.log(statecopy[index])
+  if( statecopy[index]!=null) return
+  statecopy[index]=user
+  // console.log(statecopy)
+
+  setState(statecopy);
+  // console.log(state)
+
+  const check=checkWinner(statecopy);
+
+  if(check){
+    setTitle(`User ${user} won the game`)
+      // alert(`${user} won the game`)
+      
+  }
+
+  // console.log(state[index])
+  setUser(user === 'X' ? 'O' : 'X')  
+  
+
+}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <TitleLine title={heading}/>
+    <div className='Board'>
+    <div className="row">
+      <Block onClick={()=> handleOnclick(0)} value={state[0]}/>
+      <Block onClick={()=> handleOnclick(1)} value={state[1]}/>
+      <Block onClick={()=> handleOnclick(2)} value={state[2]}/>
     </div>
+    <div className="row">
+      <Block onClick={()=> handleOnclick(3)} value={state[3]}/>
+      <Block onClick={()=> handleOnclick(4)} value={state[4]}/>
+      <Block onClick={()=> handleOnclick(5)} value={state[5]}/>
+    </div>
+    <div className="row">
+      <Block onClick={()=> handleOnclick(6)} value={state[6]}/>
+      <Block onClick={()=> handleOnclick(7)} value={state[7]}/>
+      <Block onClick={()=> handleOnclick(8)} value={state[8]}/>
+    </div>
+    </div>
+    </div>
+
   );
 }
 
