@@ -7,6 +7,7 @@ function App() {
   const [state, setState]=useState(Array(9).fill(null))
   const [user, setUser]=useState("X")
   const [heading, setTitle]=useState("Tic Tac Toe");
+  const [className, setClass]=useState("Board");
 
   const checkWinner = (state: any[]) => {
   const win =[
@@ -41,7 +42,7 @@ const handleOnclick=(index:number)=>{
   if(check){
     setTitle(`User ${user} won the game`)
       // alert(`${user} won the game`)
-      
+      setClass('Board no-click')
   }
 
   // console.log(state[index])
@@ -53,7 +54,7 @@ const handleOnclick=(index:number)=>{
   return (
     <div>
       <TitleLine title={heading}/>
-    <div className='Board'>
+    <div className={className}>
     <div className="row">
       <Block onClick={()=> handleOnclick(0)} value={state[0]}/>
       <Block onClick={()=> handleOnclick(1)} value={state[1]}/>
