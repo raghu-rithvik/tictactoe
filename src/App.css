@@ -33,6 +33,3 @@ h1{
 .row{
   display: flex;
 }
-.no-click {
-  pointer-events: none;
-}
