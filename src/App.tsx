@@ -7,6 +7,8 @@ function App() {
   const [state, setState]=useState(Array(9).fill(null))
   const [user, setUser]=useState("X")
   const [heading, setTitle]=useState("Tic Tac Toe");
+  const [className, setClass]=useState("Board");
+  const [count, setCount] = useState(1);
 
   const checkWinner = (state: any[]) => {
   const win =[
@@ -27,27 +29,22 @@ function App() {
   return false;
 };
 const handleOnclick=(index:number)=>{
+  setCount(prevCount => prevCount + 1);
+  console.log(count)
+  if(count ===9){
+    setTitle(`Match Drawn`)
+    setClass('Board no-click')
+  }
   const statecopy=Array.from(state)
-  // console.log(statecopy[index])
   if( statecopy[index]!=null) return
   statecopy[index]=user
-  // console.log(statecopy)
-
   setState(statecopy);
-  // console.log(state)
-
   const check=checkWinner(statecopy);
-
   if(check){
     setTitle(`User ${user} won the game`)
-      // alert(`${user} won the game`)
-      
+      setClass('Board no-click')
   }
-
-  // console.log(state[index])
-  setUser(user === 'X' ? 'O' : 'X')  
-  
-
+  setUser(user === 'X' ? 'O' : 'X')    
 }
 
   return (
