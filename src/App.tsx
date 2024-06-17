@@ -50,7 +50,7 @@ const handleOnclick=(index:number)=>{
   return (
     <div>
       <TitleLine title={heading}/>
-    <div className='Board'>
+      <div className={className}>
     <div className="row">
       <Block onClick={()=> handleOnclick(0)} value={state[0]}/>
       <Block onClick={()=> handleOnclick(1)} value={state[1]}/>
